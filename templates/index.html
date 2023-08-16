@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+  var months = new Array(13);
+  months[1]="января"; months[2]="февраля"; months[3]="марта"; months[4]="апреля"; months[5]="мая"; months[6]="июня"; months[7]="июля"; months[8]="августа"; months[9]="сентября"; months[10]="октября"; months[11]="ноября"; months[12]="декабря";
+
+  var time = new Date();
+  var thismonth = months[time.getMonth() + 1];
+  var date = time.getDate();
+  var thisyear = time.getYear();
+  var day = time.getDay() + 1;
+
+  if (thisyear < 2000)
+      thisyear = thisyear + 1900;
+  if (day == 1) DayofWeek = "Воскресенье";
+  if (day == 2) DayofWeek = "Понедельник";
+  if (day == 3) DayofWeek = "Вторник";
+  if (day == 4) DayofWeek = "Среда";
+  if (day == 5) DayofWeek = "Четверг";
+  if (day == 6) DayofWeek = "Пятница";
+  if (day == 7) DayofWeek = "Суббота";
+</script>
+
+<script>
+setInterval(function() {
+  var cd = new Date();
+  var clockdat = document.getElementById("clockdat");
+  clockdat.innerHTML = cd.toLocaleTimeString();
+}, 1000);
+</script>
+</head>
+<title>CryptoBotTrader</title>
+
+<body>
+<div class="row justify-content-center">
+    <h1>Crypto Trader Dashboard</h1>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Price</th>
+        <th>Volume</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for index, row in data.iterrows() %}
+    <tr>
+        <td>{{ row['Timestamp'] }}</td>
+        <td>{{ row['Price'] }}</td>
+        <td>{{ row['Volume'] }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div id="tv_chart_container"></div>
+<script type="text/javascript">
+    new TradingView.widget(
+        {
+            "width": 800,
+            "height": 500,
+            "symbol": "BINANCE:BTCUSDT",  // Replace with your desired trading pair
+            "interval": "1D",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "container_id": "tv_chart_container"
+        }
+    );
+</script>
+{% for news_item in data.articles %}
+<div class="news-item">
+    <h3><a href="{{ news_item.url }}" target="_blank">{{ news_item.title }}</a></h3>
+    <p>Source: {{ news_item.source.name | default("Unknown Source") }}</p>
+</div>
+{% endfor %}
+
+<div class="center" style="background-color: #3b424a; padding:5px;">
+  <span style="color:aqua">Сегодня:</span>
+  <span style="color:silver; font-size:14px;">
+  <script>
+      document.write(date+" ");
+      document.write(thismonth+ " "+thisyear+" "+"года"+" — "+ DayofWeek);
+  </script>
+  (<span id="clockdat" style="color:aqua;"></span>)
+  </span>
+</div>
+</body>
+</html>

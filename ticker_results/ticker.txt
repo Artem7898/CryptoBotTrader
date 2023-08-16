@@ -1,0 +1,20 @@
+symbol: BTC/USDT
+timestamp: 1692170953938
+datetime: 2023-08-16T07:29:13.938Z
+high: 29499.26
+low: 29059.6
+bid: 29191.99
+bidVolume: 2.04088
+ask: 29192.0
+askVolume: 24.3369
+vwap: 29286.85787146
+open: 29360.0
+close: 29192.0
+last: 29192.0
+previousClose: 29360.0
+change: -168.0
+percentage: -0.572
+average: 29276.0
+baseVolume: 28925.71764
+quoteVolume: 847143381.3525468
+info: {'symbol': 'BTCUSDT', 'priceChange': '-168.00000000', 'priceChangePercent': '-0.572', 'weightedAvgPrice': '29286.85787146', 'prevClosePrice': '29360.00000000', 'lastPrice': '29192.00000000', 'lastQty': '0.00037000', 'bidPrice': '29191.99000000', 'bidQty': '2.04088000', 'askPrice': '29192.00000000', 'askQty': '24.33690000', 'openPrice': '29360.00000000', 'highPrice': '29499.26000000', 'lowPrice': '29059.60000000', 'volume': '28925.71764000', 'quoteVolume': '847143381.35254680', 'openTime': '1692084553938', 'closeTime': '1692170953938', 'firstId': '3190679777', 'lastId': '3191303224', 'count': '623448'}
